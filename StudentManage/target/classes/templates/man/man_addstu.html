@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 学籍信息</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="" th:action="@{/addstu}">
+
+            <!--            需要区分是修改还是添加-->
+            <!--            发送put请求修改信息
+                            创建一个input项，name="_method",值就是指定的请求的方式
+            -->
+            <input type="hidden" name="_method" value="put" th:if="${student!=null}"/>
+            <p class="text-center" style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">学号：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="stu_id" name="stu_id" size="50" placeholder="请输入学号"
+                           data-validate="required:请输入学号" th:value="${student!=null}?${student.stu_id}"/>
+                    <input type="hidden" name="role" value="学生">
+                    <input type="hidden" name="sanhao" value="否">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">学生姓名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="stu_name" size="50" placeholder="请输入学生姓名"
+                           data-validate="required:请输入学生姓名" th:value="${student!=null}?${student.stu_name}"/>
+                </div>
+            </div>
+
+            <ul class="list-inline" style="padding-left: 58px;  padding-bottom: 25px;">
+                <li>性别：</li>
+                <li style="padding-left:0px;">
+                    <div class="field">
+                        <input name="stu_sex" id="stu_sex" type="radio" value="女"
+                               th:checked="${student!=null}?${student.stu_sex=='女'}"/>女
+                        <input name="stu_sex" id="stu_sex" type="radio" value="男"
+                               th:checked="${student!=null}?${student.stu_sex=='男'}"/>男
+                    </div>
+                </li>
+            </ul>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">出生日期：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="stu_birth" size="50" placeholder="请输入出生日期"
+                           data-validate="required:请输入出生日期" th:value="${student!=null}?${student.stu_birth}"
+                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">入学时间：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="intime" size="50" placeholder="请输入入学时间"
+                           data-validate="required:请输入入学时间" th:value="${student!=null}?${student.intime}"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">所在院系：</label>
+                </div>
+
+                <div class="field">
+                    <select name="stu_college" class="input" style="width: 25%;">
+                        <!--提交的是学院的id-->
+                        <option th:selected="${student!=null}?${collegeList.college_id==student.stu_college}"
+                                th:value="${collegeList.college_id}" th:each="collegeList:${collegeList}"
+                                th:text="${collegeList.college_name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">所学专业：</label>
+                </div>
+
+                <div class="field">
+                    <select name="stu_subject" class="input" style="width: 25%;">
+                        <!--提交的是专业的id-->
+                        <option th:selected="${student!=null}?${subjectsList.sub_id==student.stu_subject}"
+                                th:value="${subjectsList.sub_id}" th:each="subjectsList:${subjectsList}"
+                                th:text="${subjectsList.sub_name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">所在班级：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="stu_class" size="50" placeholder="请输入所在班级"
+                           data-validate="required:请输入所在班级" th:value="${student!=null}?${student.stu_class}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">学籍状态：</label>
+                </div>
+
+                <div class="field">
+                    <input type="hidden" name="stu_state" value="1">
+                    <input type="text" class="input w50" name="" size="50" value="在校" readonly="readonly"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

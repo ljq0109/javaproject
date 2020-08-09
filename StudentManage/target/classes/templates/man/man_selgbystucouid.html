@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+<body style="border-top: 2px solid#999999;">
+<div class="padding border-bottom">
+    <form th:action="@{/selgbystucouid}" method="post">
+        <ul class="search" style="padding-left:10px;">
+            <li>搜索：</li>
+            <li>
+                <input type="text" placeholder="请输入学号" id="stu_id" name="stu_id" class="input"
+                       style="width:250px; line-height:17px;display:inline-block"/>
+                <input type="text" placeholder="请输入课程号" id="cou_id" name="cou_id" class="input"
+                       style="width:250px; line-height:17px;display:inline-block"/>
+                <input class="button border-main icon-search" type="submit" value="搜索"/>
+            </li>
+        </ul>
+    </form>
+</div>
+</body>
+</html>
+

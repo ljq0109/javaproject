@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org" xmlns:overflow="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>学生信息管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+
+<body style="background-color:#f2f9fd;">
+<div class="header bg-main">
+    <div class="logo margin-big-left fadein-top">
+        <h1><img th:src="@{images/y.jpg}" class="radius-circle rotate-hover" height="50" alt=""/>学生信息管理系统</h1>
+    </div>
+    <div class="head-l">
+        <h>[[${session.loginUser}]]</h> &nbsp;&nbsp;
+        <a class="button button-little bg-red" th:href="@{../login.html}">
+            <span class="icon-power-off"></span> 退出登录</a>
+    </div>
+</div>
+<div class="leftnav">
+
+    <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+    <div style="width:200px; height:500px; overflow:auto" >
+        <h2><span class="icon-user"></span>基本设置</h2>
+        <ul>
+            <li>
+                <a th:href="@{/showManInfo}" target="right"><span class="icon-caret-right"></span>个人资料</a>
+            </li>
+            <li>
+                <a th:href="@{/changemanpass}" target="right"><span class="icon-caret-right"></span>修改密码</a>
+            </li>
+        </ul>
+
+        <h2><span class="icon-pencil-square-o"></span>用户管理</a></h2>
+        <ul>
+            <li>
+                <a th:href="@{/stulist}" target="right"><span class="icon-caret-right"></span>学生管理</a>
+            </li>
+
+            <li>
+                <a th:href="@{/tealist}" target="right"><span class="icon-caret-right"></span>教师管理</a>
+            </li>
+
+        </ul>
+
+        <h2><span class="icon-pencil-square-o"></span>学籍管理</a></h2>
+        <ul>
+            <li>
+                <a href="" th:href="@{/showstuinfo}" target="right"><span class="icon-caret-right"></span>学籍列表</a>
+            </li>
+        </ul>
+
+        <h2><span class="icon-pencil-square-o"></span>课程管理</a></h2>
+        <ul>
+            <li>
+                <a href="" th:href="@{/showcou}" target="right"><span class="icon-caret-right"></span>课程列表</a>
+            </li>
+        </ul>
+
+        <h2><span class="icon-pencil-square-o"></span>成绩管理</a></h2>
+        <ul>
+            <li>
+                <a href="" th:href="@{/showgrade}" target="right"><span class="icon-caret-right"></span>成绩查看</a>
+            </li>
+            <li>
+                <a href="" th:href="@{/selectbystuid}" target="right"><span class="icon-caret-right"></span>按照学生学号查找</a>
+            </li>
+            <li>
+                <a href="" th:href="@{/selectbyteaid}" target="right"><span class="icon-caret-right"></span>按照教职工号查找</a>
+            </li>
+            <li>
+                <a href="" th:href="@{/selectbystucouid}" target="right"><span class="icon-caret-right"></span>按照学号和课程号查找</a>
+            </li>
+
+        </ul>
+
+        <h2><span class="icon-pencil-square-o"></span>统计</a></h2>
+        <ul>
+            <li>
+                <a href="" target="right" th:href="@{/ztuixue}"><span class="icon-caret-right">退学学生</span></a>
+            </li>
+
+            <li>
+                <a href="" target="right" th:href="@{/zjieye}"><span class="icon-caret-right">结业学生</span></a>
+            </li>
+
+            <li>
+                <a href="" target="right" th:href="@{/zbiye}"><span class="icon-caret-right">毕业学生</span></a>
+            </li>
+
+            <li>
+                <a href="" target="right" th:href="@{/zsanhao}"><span class="icon-caret-right">三好学生</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".leftnav h2").click(function () {
+            $(this).next().slideToggle(200);
+            $(this).toggleClass("on");
+        })
+        $(".leftnav ul li a").click(function () {
+            $("#a_leader_txt").text($(this).text());
+            $(".leftnav ul li a").removeClass("on");
+            $(this).addClass("on");
+        })
+
+        $(".icon-home").click(function () {
+            $("#a_leader_txt").text("所有公告");
+            $(".leftnav ul li a").removeClass("on");
+            $(this).addClass("on");
+        })
+
+    });
+</script>
+
+<ul class="bread">
+    <li>
+        <a th:href="@{/info}" target="right" class="icon-home"> 首页</a>
+    </li>
+    <li>
+        <a href="##" id="a_leader_txt">公告信息</a>
+    </li>
+</ul>
+<div class="admin">
+    <iframe scrolling="auto" rameborder="0" th:src="@{/info}" name="right" width="100%" height="100%"></iframe>
+</div>
+<div style="text-align:center;">
+</div>
+</body>
+
+</html>

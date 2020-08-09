@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>登录</title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}"></link>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"></link>
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+<body>
+<div class="bg"></div>
+<div class="container">
+    <div class="line bouncein">
+        <div class="xs6 xm4 xs3-move xm4-move">
+            <div style="height:150px;"></div>
+            <div class="media media-y margin-big-bottom">
+            </div>
+            <form th:action="@{/login}" method="post">
+                <div class="panel loginbox">
+                    <div class="text-center margin-big padding-big-top"><h1>学生管理系统</h1></div>
+                    <!--登录名，密码错误提示-->
+                    <p class="text-center" style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+                    <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
+                        <!--登录名-->
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="text" class="input input-big" name="userid" placeholder="登录账号"
+                                       data-validate="required:请填写账号"/>
+                                <span class="icon icon-user margin-small"></span>
+                            </div>
+                        </div>
+                        <!--登录密码-->
+                        <div class="form-group">
+                            <div class="field field-icon-right">
+                                <input type="password" class="input input-big" name="password" placeholder="登录密码"
+                                       data-validate="required:请填写密码"/>
+                                <span class="icon icon-key margin-small"></span>
+                            </div>
+                        </div>
+                        <br>
+                        <!--选择角色-->
+                        <div class="con_select">
+                            <input type="radio" name="role" checked="true" value="学生"/>学生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="role" value="教师"/>教师&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="role" value="管理员"/>管理员
+                        </div>
+                    </div>
+                    <div style="padding:30px;"><input type="submit"
+                                                      class="button button-block bg-main text-big input-big" value="登录">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link rel="stylesheet" th:href="@{/css/pintuer.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/pintuer.js}"></script>
+</head>
+
+<body>
+<div class="panel admin-panel">
+    <div class="panel-head"><strong><span class="icon-key"></span> 课程信息</strong></div>
+    <div class="body-content">
+        <form method="post" class="form-x" action="" th:action="@{/addcou}">
+
+<!--            需要区分是修改还是添加-->
+<!--            发送put请求修改信息
+                创建一个input项，name="_method",值就是指定的请求的方式
+-->
+            <input type="hidden" name="_method" value="put" th:if="${course!=null}" />
+            <p class="text-center" style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">课程号：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" id="cou_id" name="cou_id" size="50" placeholder="请输入课程号"
+                           data-validate="required:请输入课程号" th:value="${course!=null}?${course.cou_id}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">课程名：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="cou_name" size="50" placeholder="请输入课程名"
+                           data-validate="required:请输入课程名" th:value="${course!=null}?${course.cou_name}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">学分：</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input w50" name="cou_credit" size="50" placeholder="请输入学分"
+                           data-validate="required:请输入学分" th:value="${course!=null}?${course.cou_credit}"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">所在院系：</label>
+                </div>
+
+                <div class="field">
+                    <select name="cou_college" class="input" style="width: 25%;">
+                        <!--提交的是学院的id-->
+                        <option th:selected="${course!=null}?${collegeList.college_id==course.cou_college}" th:value="${collegeList.college_id}" th:each="collegeList:${collegeList}"
+                                th:text="${collegeList.college_name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label for="sitename">任课教师：</label>
+                </div>
+                <div class="field">
+                    <select name="cou_teacher" class="input" style="width: 25%;">
+                        <!--提交的是学院的id-->
+                        <option th:selected="${course!=null}?${teacherList.tea_id==course.cou_teacher}" th:value="${teacherList.tea_id}" th:each="teacherList:${teacherList}"
+                                th:text="${teacherList.tea_name}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label></label>
+                </div>
+                <div class="field">
+                    <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
